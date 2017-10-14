@@ -2,10 +2,10 @@ import java.util.*;
 
 public class Main {
 
-    public static Random randInt = new Random();
-    public static Scanner keyboard = new Scanner(System.in);
+    private static Random randInt = new Random();
+    private static Scanner keyboard = new Scanner(System.in);
 
-    public static char[] numbers = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    private static char[] numbers = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
     public static void main(String[] args) {
         System.out.println("Please enter the desired size or press zero for the default");
@@ -23,7 +23,7 @@ public class Main {
 
     }
 
-    public static String checkInput(String input) {
+    private static String checkInput(String input) {
 
         /***
          * This works by multiplying the numbers array size by the input length to get sumOfNumbers.
@@ -35,17 +35,17 @@ public class Main {
 
         if (!input.equals("") || input.equals("0")) {
             char[] inputArray = input.toCharArray();
-            int sumOfNumbers = numbers.length * input.length();
+            int numbersTimesInput = numbers.length * input.length();
 
             for (Character letter : inputArray) {
                 for (char c : numbers) {
                     if (!letter.equals(c)) {
-                        sumOfNumbers = sumOfNumbers - 1;
+                        numbersTimesInput = numbersTimesInput - 1;
                     }
                 }
             }
 
-            if (sumOfNumbers != input.length()) {
+            if (numbersTimesInput != input.length()) {
                 System.out.println("Invalid input detected");
                 System.exit(1);
             }
@@ -57,7 +57,7 @@ public class Main {
         return input;
     }
 
-    public static String generate(int input) {
+    private static String generate(int input) {
         String pw = "";
 
         char[] letters = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
@@ -92,6 +92,7 @@ public class Main {
         return pw;
     }
 
+    //TODO: this function
     /*
     public static String removeForbiddenCharacters(String forbiddenCharacters ,String password){
 
