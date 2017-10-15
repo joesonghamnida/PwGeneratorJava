@@ -15,11 +15,14 @@ public class Main {
 
         //TODO: finish this and come up with a way for it to fill in the missing letters if the amount is less than the desired size
         //TODO: refactoring. this desperately needs refactoring
-        //System.out.println("Please enter forbidden characters");
-        //String forbiddenCharacters = keyboard.nextLine();
+        System.out.println("Please enter forbidden characters");
+        String forbiddenCharacters = keyboard.nextLine();
 
+        password = removeForbiddenCharacters(forbiddenCharacters, password);
 
+        //TODO: make this better
         System.out.println(password);
+        System.out.println("Password length: "+password.length());
 
     }
 
@@ -92,29 +95,36 @@ public class Main {
         return pw;
     }
 
-    //TODO: this function
-    /*
+    //TODO: this doesn't work with multiple forbidden characters. fix this
     public static String removeForbiddenCharacters(String forbiddenCharacters ,String password){
 
         ArrayList<String> passwordArray = new ArrayList<>();
         ArrayList<String> permittedLetters = passwordArray;
+
+        //TODO: make this into a char array
         ArrayList<String> forbiddenArray = new ArrayList<>();
 
-        for(int j = 0;j < password.length();j++){
+        for(int i = 0;i<forbiddenCharacters.length();i++){
+            forbiddenArray.add(Character.toString(forbiddenCharacters.charAt(i)));
+        }
+
+        for(int j = 0;j<password.length();j++){
             passwordArray.add(Character.toString(password.charAt(j)));
         }
 
-        for (int k = 0;k < forbiddenCharacters.length();k++){
-            forbiddenArray.add(Character.toString(forbiddenCharacters.charAt(k)));
-        }
-
-        for(String letter : passwordArray){
-            if(
-
+        for(String a : passwordArray){
+            String blank = "";
+            for(String b : forbiddenArray){
+                if(a.equals(b)){
+                    blank = password.replace(b, "");
+                    blank.trim();
+                }else{
+                    blank = password;
+                }
             }
+            password = blank;
         }
-
         return password;
-    }*/
+    }
 
 }
