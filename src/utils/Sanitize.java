@@ -7,13 +7,11 @@ public class Sanitize {
     public static String removeForbiddenCharacters(String forbiddenCharacters, String password) {
         ArrayList<String> passwordArray = new ArrayList<>();
         ArrayList<String> forbiddenArray = new ArrayList<>();
-        ArrayList<Integer> removedIndexes = new ArrayList<>();
-
+        
         forbiddenArray = loadForbiddenArray(forbiddenArray, forbiddenCharacters);
         passwordArray = loadPasswordArray(passwordArray, password);
 
-        removedIndexes = markForbiddenCharacters(forbiddenArray, passwordArray, removedIndexes);
-        passwordArray = stripForbiddenCharacters(passwordArray, removedIndexes);
+        passwordArray = stripForbiddenCharacters(passwordArray, forbiddenArray);
         password = recreatePassword(passwordArray);
 
         return password;
@@ -49,9 +47,25 @@ public class Sanitize {
     }
 
     //TODO: fix this
-    public static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes){
-        ArrayList<String> swapArray = passwordArray;
-        passwordArray = swapArray;
+    public static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<String> forbiddenCharacters){
+        ArrayList<String> cleanedPassword = new ArrayList<>();
+
+        for(String character : passwordArray){ ;
+            for (String forbidden : forbiddenCharacters){
+                if(character.equals(forbidden)){
+                    cleanedPassword.add(character + " ");
+                }
+                else{
+                    cleanedPassword.add(character);
+                }
+            }
+        }
+
+        for(String index : cleanedPassword){
+            if(index.contains(" ")){
+                passwordArray.remove(cleanedPassword.indexOf(index));
+            }
+        }
 
         return passwordArray;
     }
