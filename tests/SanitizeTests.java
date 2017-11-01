@@ -55,21 +55,41 @@ public class SanitizeTests {
     //TODO: fix this
     @Test
     public void StripSingleForbiddenCharacter(){
-        String password = "abc#";
-        ArrayList<String> passwordArray = new ArrayList<>();
-        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+
+        ArrayList<String> blankArray = new ArrayList<>();
 
         String forbiddenCharacters = "#";
         ArrayList<String> forbiddenArray = new ArrayList<>();
         forbiddenArray = Sanitize.loadForbiddenArray(forbiddenArray, forbiddenCharacters);
 
+        String password = "abc#";
+        ArrayList<String> passwordArray = new ArrayList<>();
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+
         passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
         Assert.assertEquals(3, passwordArray.size());
+        System.out.println("One");
 
+        password = "#abc";
+        passwordArray = blankArray;
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
+        Assert.assertEquals(3, passwordArray.size());
+        System.out.println("Two");
+
+        password = "ab#c";
+        passwordArray = blankArray;
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
+        Assert.assertEquals(3, passwordArray.size());
+        System.out.println("Three");
     }
 
     @Test
     public void StripMultipleForbiddenCharacters(){
+
+        ArrayList<String> blankArray = new ArrayList<>();
+
         String password = "a@ER^bc#";
         ArrayList<String> passwordArray = new ArrayList<>();
         passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
