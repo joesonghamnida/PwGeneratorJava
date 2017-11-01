@@ -3,7 +3,7 @@ package utils;
 import java.util.ArrayList;
 
 public class Sanitize {
-    
+
     public static String removeForbiddenCharacters(String forbiddenCharacters, String password) {
         ArrayList<String> passwordArray = new ArrayList<>();
         ArrayList<String> forbiddenArray = new ArrayList<>();
@@ -19,7 +19,7 @@ public class Sanitize {
         return password;
     }
 
-    private static ArrayList<String> loadForbiddenArray(ArrayList<String> forbiddenArray, String forbiddenCharacters) {
+    public static ArrayList<String> loadForbiddenArray(ArrayList<String> forbiddenArray, String forbiddenCharacters) {
 
         for (int i = 0; i < forbiddenCharacters.length(); i++) {
             forbiddenArray.add(Character.toString(forbiddenCharacters.toCharArray()[i]));
@@ -28,7 +28,7 @@ public class Sanitize {
         return forbiddenArray;
     }
 
-    private static ArrayList<String> loadPasswordArray(ArrayList<String> passwordArray, String password) {
+    public static ArrayList<String> loadPasswordArray(ArrayList<String> passwordArray, String password) {
 
         for (int j = 0; j < password.length(); j++) {
             passwordArray.add(Character.toString(password.toCharArray()[j]));
@@ -37,7 +37,7 @@ public class Sanitize {
         return passwordArray;
     }
 
-    private static ArrayList<Integer> markForbiddenCharacters(ArrayList<String> forbiddenArray, ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes) {
+    public static ArrayList<Integer> markForbiddenCharacters(ArrayList<String> forbiddenArray, ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes) {
         for (int i = 0; i < passwordArray.size(); i++) {
             for (int marker = 0; marker < forbiddenArray.size(); marker++) {
                 if (passwordArray.get(i).equals(forbiddenArray.get(marker))) {
@@ -48,7 +48,7 @@ public class Sanitize {
         return removedIndexes;
     }
 
-    private static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes){
+    public static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes){
         ArrayList<String> swapArray = passwordArray;
 
         for(Integer index : removedIndexes){
@@ -60,7 +60,7 @@ public class Sanitize {
         return passwordArray;
     }
 
-    private static String recreatePassword(ArrayList<String> passwordArray){
+    public static String recreatePassword(ArrayList<String> passwordArray){
         String password = "";
 
         for(String letter : passwordArray){
