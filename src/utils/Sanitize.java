@@ -3,43 +3,74 @@ package utils;
 import java.util.ArrayList;
 
 public class Sanitize {
-
-    /***
-     *
-     * have something to mark the forbidden characters and their indexes, and mark them as not legit.
-     * regenerate random number to pick
-     *
-     * */
-
-    //TODO: this doesn't work with multiple forbidden characters. fix this
-
-    public static String removeForbiddenCharacters(String forbiddenCharacters ,String password){
+    
+    public static String removeForbiddenCharacters(String forbiddenCharacters, String password) {
         ArrayList<String> passwordArray = new ArrayList<>();
-        ArrayList<String> permittedLetters = passwordArray;
-
-        //TODO: make this into a char array
         ArrayList<String> forbiddenArray = new ArrayList<>();
+        ArrayList<Integer> removedIndexes = new ArrayList<>();
 
-        for(int i = 0;i<forbiddenCharacters.length();i++){
+        forbiddenArray = loadForbiddenArray(forbiddenArray, forbiddenCharacters);
+        passwordArray = loadPasswordArray(passwordArray, password);
+
+        removedIndexes = markForbiddenCharacters(forbiddenArray, passwordArray, removedIndexes);
+        passwordArray = stripForbiddenCharacters(passwordArray, removedIndexes);
+        password = recreatePassword(passwordArray);
+
+        return password;
+    }
+
+    private static ArrayList<String> loadForbiddenArray(ArrayList<String> forbiddenArray, String forbiddenCharacters) {
+
+        for (int i = 0; i < forbiddenCharacters.length(); i++) {
             forbiddenArray.add(Character.toString(forbiddenCharacters.toCharArray()[i]));
         }
 
-        for(int j = 0;j<password.length();j++){
+        return forbiddenArray;
+    }
+
+    private static ArrayList<String> loadPasswordArray(ArrayList<String> passwordArray, String password) {
+
+        for (int j = 0; j < password.length(); j++) {
             passwordArray.add(Character.toString(password.toCharArray()[j]));
         }
 
-        for(String a : passwordArray){
-            String blank = "";
-            for(String b : forbiddenArray){
-                if(a.equals(b)){
-                    blank = password.replace(b, "");
-                    blank.trim();
-                }else{
-                    blank = password;
+        return passwordArray;
+    }
+
+    private static ArrayList<Integer> markForbiddenCharacters(ArrayList<String> forbiddenArray, ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes) {
+        for (int i = 0; i < passwordArray.size(); i++) {
+            for (int marker = 0; marker < forbiddenArray.size(); marker++) {
+                if (passwordArray.get(i).equals(forbiddenArray.get(marker))) {
+                    removedIndexes.add(i);
                 }
             }
-            password = blank;
         }
+        return removedIndexes;
+    }
+
+    private static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes){
+        ArrayList<String> swapArray = passwordArray;
+
+        for(Integer index : removedIndexes){
+            swapArray.remove(index);
+        }
+
+        passwordArray = swapArray;
+
+        return passwordArray;
+    }
+
+    private static String recreatePassword(ArrayList<String> passwordArray){
+        String password = "";
+
+        for(String letter : passwordArray){
+            password = password + letter;
+        }
+
         return password;
     }
+
 }
+
+
+
