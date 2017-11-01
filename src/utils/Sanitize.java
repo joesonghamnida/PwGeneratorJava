@@ -7,7 +7,7 @@ public class Sanitize {
     public static String removeForbiddenCharacters(String forbiddenCharacters, String password) {
         ArrayList<String> passwordArray = new ArrayList<>();
         ArrayList<String> forbiddenArray = new ArrayList<>();
-        
+
         forbiddenArray = loadForbiddenArray(forbiddenArray, forbiddenCharacters);
         passwordArray = loadPasswordArray(passwordArray, password);
 
