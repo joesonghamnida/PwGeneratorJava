@@ -2,7 +2,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import utils.Sanitize;
-import utils.Sanitize.*;
 
 import java.util.ArrayList;
 
@@ -19,17 +18,57 @@ public class SanitizeTests {
     public void LoadPasswordArray(){
         String password = "abc";
         ArrayList<String> passwordArray = new ArrayList<>();
-        Assert.assertEquals(3, Sanitize.loadPasswordArray(passwordArray, password).size());
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+        Assert.assertEquals(3, passwordArray.size());
     }
 
     @Test
-    public void MarkSingleForbiddenCharacter(){}
+    public void MarkSingleForbiddenCharacter(){
+        String password = "abc#";
+        ArrayList<String> passwordArray = new ArrayList<>();
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+
+        String forbiddenCharacters = "#";
+        ArrayList<String> forbiddenArray = new ArrayList<>();
+        forbiddenArray = Sanitize.loadForbiddenArray(forbiddenArray, forbiddenCharacters);
+
+        ArrayList<Integer> removedIndexes = new ArrayList<>();
+        removedIndexes = Sanitize.markForbiddenCharacters(forbiddenArray, passwordArray, removedIndexes);
+        Assert.assertEquals(1, removedIndexes.size());
+    }
 
     @Test
-    public void MarkMultipleForbiddenCharacters(){}
+    public void MarkMultipleForbiddenCharacters(){
+        String password = "@abc#";
+        ArrayList<String> passwordArray = new ArrayList<>();
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
 
+        String forbiddenCharacters = "#a@";
+        ArrayList<String> forbiddenArray = new ArrayList<>();
+        forbiddenArray = Sanitize.loadForbiddenArray(forbiddenArray, forbiddenCharacters);
+
+        ArrayList<Integer> removedIndexes = new ArrayList<>();
+        removedIndexes = Sanitize.markForbiddenCharacters(forbiddenArray, passwordArray, removedIndexes);
+        Assert.assertEquals(3, removedIndexes.size());
+    }
+    
+    //TODO: fix this
     @Test
-    public void StripSingleForbiddenCharacter(){}
+    public void StripSingleForbiddenCharacter(){
+        String password = "abc#";
+        ArrayList<String> passwordArray = new ArrayList<>();
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+
+        String forbiddenCharacters = "#";
+        ArrayList<String> forbiddenArray = new ArrayList<>();
+        forbiddenArray = Sanitize.loadForbiddenArray(forbiddenArray, forbiddenCharacters);
+
+        ArrayList<Integer> removedIndexes = new ArrayList<>();
+        removedIndexes = Sanitize.markForbiddenCharacters(forbiddenArray, passwordArray, removedIndexes);
+
+        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, removedIndexes);
+        Assert.assertEquals(3, passwordArray.size());
+    }
 
     @Test
     public void StripMultipleForbiddenCharacters(){}
