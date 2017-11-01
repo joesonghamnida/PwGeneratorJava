@@ -48,13 +48,9 @@ public class Sanitize {
         return removedIndexes;
     }
 
+    //TODO: fix this
     public static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<Integer> removedIndexes){
         ArrayList<String> swapArray = passwordArray;
-
-        for(Integer index : removedIndexes){
-            swapArray.remove(index);
-        }
-
         passwordArray = swapArray;
 
         return passwordArray;
