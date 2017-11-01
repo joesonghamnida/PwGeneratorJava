@@ -2,19 +2,18 @@ package utils;
 
 public class Input {
 
-    public static String Verify(char[] numbers, String input){
-
-        /***
-         * This works by multiplying the numbers array size by the input length to get sumOfNumbers.
-         * When a character does not match, 1 is subtracted from sumOfNumbers
-         * so sumOfNumbers = sumOfNumbers - 1.
-         * After the entire input has been compared to the characters in numbers,
-         * if the input length does not match sumOfNumbers, the input is invalid
-         */
+    public static String Verify(char[] numbers, String input) {
 
         if (!input.equals("") || input.equals("0")) {
             char[] inputArray = input.toCharArray();
+
+            //so three char input * 10 = 30
             int numbersTimesInput = numbers.length * input.length();
+
+            //loops through input and compares each char to number array
+            //if char doesn't match, subtracts one from total
+            //example of successful match: input length = 3, numbersXinput after the loop = 3
+            //example of invalid match: input.length = 3, numbersXinput after loop = 2
 
             for (Character letter : inputArray) {
                 for (char c : numbers) {
@@ -30,6 +29,7 @@ public class Input {
             }
 
         } else {
+            //32 is the default size
             input = "32";
         }
 

@@ -18,7 +18,7 @@ public class Main {
         String password = Generate.generatePassword(randInt, Integer.valueOf(input), letters, numbers, characters);
 
         //TODO: finish this and come up with a way for it to fill in the missing letters if the amount is less than the desired size
-        
+
         System.out.println("Please enter forbidden characters");
         String forbiddenCharacters = keyboard.nextLine();
 

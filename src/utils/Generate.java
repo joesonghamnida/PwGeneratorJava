@@ -18,14 +18,12 @@ public class Generate {
 
             switch (nextChar) {
                 case 0:
-
                     c = letters[randInt.nextInt(letters.length)];
 
                     int upper = randInt.nextInt(2);
                     if (upper == 1) {
                         c = Character.toUpperCase(c);
                     }
-
                     break;
                 case 1:
                     c = numbers[randInt.nextInt(numbers.length)];
