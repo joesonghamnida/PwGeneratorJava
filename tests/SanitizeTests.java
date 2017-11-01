@@ -65,10 +65,22 @@ public class SanitizeTests {
 
         passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
         Assert.assertEquals(3, passwordArray.size());
+
     }
 
     @Test
-    public void StripMultipleForbiddenCharacters(){}
+    public void StripMultipleForbiddenCharacters(){
+        String password = "a@ER^bc#";
+        ArrayList<String> passwordArray = new ArrayList<>();
+        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
+
+        String forbiddenCharacters = "#@^";
+        ArrayList<String> forbiddenArray = new ArrayList<>();
+        forbiddenArray = Sanitize.loadForbiddenArray(forbiddenArray, forbiddenCharacters);
+
+        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
+        Assert.assertEquals(5, passwordArray.size());
+    }
 
     @Test
     public void RecreatePassword(){}
