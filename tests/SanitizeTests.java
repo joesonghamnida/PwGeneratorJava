@@ -51,7 +51,7 @@ public class SanitizeTests {
         removedIndexes = Sanitize.markForbiddenCharacters(forbiddenArray, passwordArray, removedIndexes);
         Assert.assertEquals(3, removedIndexes.size());
     }
-    
+
     //TODO: fix this
     @Test
     public void StripSingleForbiddenCharacter(){
@@ -63,10 +63,7 @@ public class SanitizeTests {
         ArrayList<String> forbiddenArray = new ArrayList<>();
         forbiddenArray = Sanitize.loadForbiddenArray(forbiddenArray, forbiddenCharacters);
 
-        ArrayList<Integer> removedIndexes = new ArrayList<>();
-        removedIndexes = Sanitize.markForbiddenCharacters(forbiddenArray, passwordArray, removedIndexes);
-
-        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, removedIndexes);
+        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
         Assert.assertEquals(3, passwordArray.size());
     }
 
