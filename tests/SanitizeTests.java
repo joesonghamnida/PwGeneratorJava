@@ -52,7 +52,6 @@ public class SanitizeTests {
         Assert.assertEquals(3, removedIndexes.size());
     }
 
-    //TODO: fix this
     @Test
     public void StripSingleForbiddenCharacter(){
 
@@ -83,10 +82,10 @@ public class SanitizeTests {
         System.out.println("Three");
     }
 
+    //TODO: bug with forbidden characters in array and forbidden characters in password not being in the
+    //TODO: same order
     @Test
     public void StripMultipleForbiddenCharacters(){
-
-        ArrayList<String> blankArray = new ArrayList<>();
 
         String password = "a@ER^bc#";
         ArrayList<String> passwordArray = new ArrayList<>();
