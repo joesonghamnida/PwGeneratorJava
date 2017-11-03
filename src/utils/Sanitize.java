@@ -45,24 +45,25 @@ public class Sanitize {
         }
         return removedIndexes;
     }
-
-    //TODO: fix this
-    public static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<String> forbiddenCharacters){
+    
+    //TODO: bug with forbidden characters in array and forbidden characters in password not being in the
+    //TODO: same order
+    public static ArrayList<String> stripForbiddenCharacters(ArrayList<String> passwordArray, ArrayList<String> forbiddenCharacters) {
         ArrayList<String> cleanedPassword = new ArrayList<>();
 
-        for(String character : passwordArray){ ;
-            for (String forbidden : forbiddenCharacters){
-                if(character.equals(forbidden)){
+        for (String character : passwordArray) {
+
+            for (String forbidden : forbiddenCharacters) {
+                if (character.equals(forbidden)) {
                     cleanedPassword.add(character + " ");
-                }
-                else{
+                } else {
                     cleanedPassword.add(character);
                 }
             }
         }
 
-        for(String index : cleanedPassword){
-            if(index.contains(" ")){
+        for (String index : cleanedPassword) {
+            if (index.contains(" ")) {
                 passwordArray.remove(cleanedPassword.indexOf(index));
             }
         }
@@ -70,10 +71,10 @@ public class Sanitize {
         return passwordArray;
     }
 
-    public static String recreatePassword(ArrayList<String> passwordArray){
+    public static String recreatePassword(ArrayList<String> passwordArray) {
         String password = "";
 
-        for(String letter : passwordArray){
+        for (String letter : passwordArray) {
             password = password + letter;
         }
 
