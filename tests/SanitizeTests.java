@@ -56,8 +56,6 @@ public class SanitizeTests {
     @Test
     public void StripSingleForbiddenCharacter(){
 
-        ArrayList<String> blankArray = new ArrayList<>();
-
         String forbiddenCharacters = "#";
         ArrayList<String> forbiddenArray = new ArrayList<>();
         forbiddenArray = Sanitize.loadForbiddenArray(forbiddenArray, forbiddenCharacters);
@@ -71,17 +69,17 @@ public class SanitizeTests {
         System.out.println("One");
 
         password = "#abc";
-        passwordArray = blankArray;
-        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
-        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
-        Assert.assertEquals(3, passwordArray.size());
+        ArrayList<String> passwordArrayTwo = new ArrayList<>();
+        passwordArrayTwo = Sanitize.loadPasswordArray(passwordArrayTwo, password);
+        passwordArrayTwo = Sanitize.stripForbiddenCharacters(passwordArrayTwo, forbiddenArray);
+        Assert.assertEquals(3, passwordArrayTwo.size());
         System.out.println("Two");
 
         password = "ab#c";
-        passwordArray = blankArray;
-        passwordArray = Sanitize.loadPasswordArray(passwordArray, password);
-        passwordArray = Sanitize.stripForbiddenCharacters(passwordArray, forbiddenArray);
-        Assert.assertEquals(3, passwordArray.size());
+        ArrayList<String> passwordArrayThree = new ArrayList<>();
+        passwordArrayThree = Sanitize.loadPasswordArray(passwordArrayThree, password);
+        passwordArrayThree = Sanitize.stripForbiddenCharacters(passwordArrayThree, forbiddenArray);
+        Assert.assertEquals(3, passwordArrayThree.size());
         System.out.println("Three");
     }
 
