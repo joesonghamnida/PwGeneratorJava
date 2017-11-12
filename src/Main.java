@@ -1,5 +1,4 @@
 import java.util.*;
-
 import utils.*;
 
 public class Main {
@@ -7,32 +6,28 @@ public class Main {
     private static Random randInt = new Random();
     private static Scanner keyboard = new Scanner(System.in);
 
-    private static char[] numbers = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-    private static char[] letters = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    private static char[] characters = new char[]{'!', '@', '#', '$', '%', '^', '&', '*', '(', ')'};
-
     public static void main(String[] args) {
         System.out.println("Please enter the desired size or press zero for the default");
         String input = keyboard.nextLine();
-        input = Input.Verify(numbers, input);
-        String password = Generate.generatePassword(randInt, Integer.valueOf(input), letters, numbers, characters);
 
-        //TODO: finish this and come up with a way for it to fill in the missing letters if the amount is less than the desired size
+        if(!Input.Verify(input)){
+            System.out.println("Invalid input");
+            System.exit(1);
+        }
 
-        System.out.println("Please enter forbidden characters");
+        int pwLength = Integer.valueOf(input);
+
+        System.out.println("Please enter forbidden characters or press the enter key for none");
         String forbiddenCharacters = keyboard.nextLine();
 
-        password = Sanitize.removeForbiddenCharacters(forbiddenCharacters, password);
+        ArrayList<String> numbers = Generate.loadNumbers();
+        ArrayList<String> letters = Generate.loadLowerCaseLetters();
+        letters = Generate.loadUpperCaseLetters(letters);
+        ArrayList<String> characters = Generate.loadCharacters();
+        ArrayList<String> permittedCharacters = Generate.createCharacterSpace(forbiddenCharacters,numbers,letters,characters);
 
-        //TODO: make this better
-        System.out.println(password);
-        System.out.println("Password length: "+password.length());
+        System.out.println(Generate.generatePassword(randInt, permittedCharacters, pwLength));
 
     }
-
-
-
-
-
 
 }

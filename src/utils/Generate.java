@@ -12,6 +12,7 @@ public class Generate {
 
         while (counter < input){
             password = password + fullArray.get(randInt.nextInt(fullArray.size()-1));
+            counter++;
         }
 
         return password;
